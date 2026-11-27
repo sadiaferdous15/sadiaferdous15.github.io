@@ -129,13 +129,50 @@ h2{font:400 clamp(28px,3.6vw,38px)/1.15 var(--serif);margin:0 0 14px}
 .copy{font:600 14px var(--sans);border:0;border-radius:8px;padding:9px 14px;background:var(--accent-ink);color:var(--accent);cursor:pointer}
 
 @media(max-width:600px){.file{height:330px;margin-top:20px}.folder{inset:34px 6px 0}.kv b{font-size:24px}}
+
+.case{margin:8px 0 0;display:grid;gap:12px}
+.case div{border-left:3px solid var(--accent);padding:2px 0 2px 14px}
+.case dt{font:500 12.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.case dd{margin:2px 0 0;color:var(--muted)}
+/* work samples */
+.samples{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+@media(max-width:900px){.samples{grid-template-columns:1fr}}
+.sample{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px;position:relative;overflow:hidden}
+.sample h3{font:500 18px var(--sans);margin:0 0 4px}.sample .sub{color:var(--muted);font-size:14.5px;margin:0 0 14px}
+.weeks{display:grid;grid-template-columns:repeat(13,1fr);gap:5px}
+.week{display:grid;grid-template-rows:repeat(5,1fr);gap:5px}
+.day{position:relative;aspect-ratio:1;border-radius:4px;background:color-mix(in srgb,var(--ink) 6%,transparent);display:flex;flex-wrap:wrap;align-content:flex-start;gap:1px;padding:2px;cursor:default}
+.day i{width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:0;transform:scale(0);transition:opacity .3s,transform .4s cubic-bezier(.2,1.6,.4,1)}
+.on .day i{opacity:1;transform:none}
+.day:hover{outline:2px solid var(--accent);outline-offset:1px}
+.wk-lab{display:flex;justify-content:space-between;font:12px var(--mono);color:var(--muted);margin-top:8px}
+.sheetgrid{display:grid;grid-template-columns:repeat(20,1fr);gap:2px 3px}
+.cell{height:9px;border-radius:2px;background:color-mix(in srgb,#2e9d6a 55%,var(--paper));transition:background .4s}
+.cell.err{background:var(--rose)}
+.fixed .cell.err{background:color-mix(in srgb,#2e9d6a 55%,var(--paper));box-shadow:inset 0 0 0 1.5px #2e9d6a}
+.row-h .cell{filter:brightness(.88)}
+.pen{position:absolute;top:118px;bottom:74px;width:2px;left:0;background:var(--rose);opacity:0;box-shadow:0 0 12px 2px color-mix(in srgb,var(--rose) 50%,transparent)}
+.run .pen{animation:pen 1.8s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes pen{0%{left:22px;opacity:1}95%{opacity:1}100%{left:calc(100% - 22px);opacity:0}}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:10px}
+.legend b{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:-1px;margin-right:5px}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font:12.5px var(--sans);padding:5px 9px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-130%);opacity:0;transition:opacity .15s;z-index:4}
+.illu{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+/* pointer spotlight on cards and panels, magnetic buttons */
+.card,.panel,.sample,.law{background-image:radial-gradient(260px circle at var(--mx,-300px) var(--my,-300px),color-mix(in srgb,var(--accent) 9%,transparent),transparent 70%)}
+.card{background-image:radial-gradient(260px circle at var(--mx,-300px) var(--my,-300px),color-mix(in srgb,var(--accent) 9%,transparent),transparent 70%),repeating-linear-gradient(180deg,transparent 0 27px,color-mix(in srgb,var(--accent) 12%,transparent) 27px 28px)}
+.btn{transition:transform .2s cubic-bezier(.2,.8,.2,1),border-color .15s,translate .25s cubic-bezier(.2,.8,.2,1)}
+h2{transition:letter-spacing .6s}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
 footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:14px}
 </style>
 </head>
 <body>
 <header><div class="wrap top">
   <a class="brand" href="#">Sadia Ferdous</a>
-  <nav><a href="#work">Work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#contact">Contact</a></nav>
+  <nav><a href="#work">Work</a><a href="#experience">Experience</a><a href="#samples">Samples</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#contact">Contact</a></nav>
   <button class="theme" id="theme" type="button" title="Switch colour theme">Dark</button>
 </div></header>
 
@@ -149,7 +186,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);f
       <div class="actions">
         <a class="btn primary" href="cv.pdf" download>Download CV</a>
         <a class="btn" href="https://linkedin.com/in/sadia-ferdous-281480358" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="mailto:sajiaferdous1422@gmail.com">Email</a>
+        <a class="btn" href="mailto:ferdous11-1893@s.diu.edu.bd">Email</a>
       </div>
     </div>
     <div class="file" id="file" aria-label="Personnel file with key numbers">
@@ -181,7 +218,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);f
       <div>
         <p class="eyebrow">Internship report · Ispahani Islamia Eye Institute and Hospital</p>
         <h2 id="p2d-h">From paper to digital</h2>
-        <p>I scanned, labelled and indexed more than 300 paper employee files so the HR team could find a record in seconds, and I wrote my internship report on how the department's paper workflow could move to a paperless system.</p>
+        <dl class="case"><div><dt>Problem</dt><dd>Employee records lived in paper folders, so finding one file meant searching shelves by hand.</dd></div><div><dt>What I did</dt><dd>Scanned, labelled and indexed 300+ files into an organised system, and wrote my internship report on moving the whole HR workflow to paperless.</dd></div><div><dt>Result</dt><dd>The HR team could search for a record quickly instead of going through paper folders.</dd></div></dl>
       </div>
       <div class="board" id="board" aria-label="Animation: paper files turning into indexed digital records">
         <div class="grid" id="grid"></div>
@@ -220,6 +257,31 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);f
         <li>Wrote and formatted internal HR documents and reports in a clear, consistent style for management.</li>
         <li>Supported interview coordination across <b>3 hiring rounds</b>, including candidate introductions and scheduling.</li>
       </ul>
+    </div>
+  </section>
+
+
+  <section id="samples" aria-labelledby="sm-h">
+    <p class="eyebrow">What the work looked like</p>
+    <h2 id="sm-h">Two pictures of my internships</h2>
+    <div class="samples">
+      <div class="sample" id="board1">
+        <h3>Interview scheduling, Jul – Sep 2026</h3>
+        <p class="sub">Each dot is one candidate I called, confirmed and booked for a panel: <b>150+</b> over 13 weeks.</p>
+        <div class="weeks" id="weeks" aria-hidden="true"></div>
+        <div class="wk-lab"><span>July</span><span>August</span><span>September</span></div>
+        <p class="illu">Illustration: the spread across days is drawn for this page; the total comes from my CV.</p>
+        <span class="tip" id="tip1"></span>
+      </div>
+      <div class="sample" id="board2">
+        <h3>Attendance records, 26-member remote team</h3>
+        <p class="sub">Daily attendance for every team member, checked and corrected before each monthly report.</p>
+        <div class="sheetgrid" id="sheet" aria-hidden="true"></div>
+        <span class="pen"></span>
+        <div class="legend"><span><b style="background:color-mix(in srgb,#2e9d6a 55%,var(--paper))"></b>Recorded</span><span><b style="background:var(--rose)"></b>Error found</span><span><b style="box-shadow:inset 0 0 0 1.5px #2e9d6a"></b>Corrected</span></div>
+        <p class="illu">Illustration with made-up cells, no real employee data; hover a row.</p>
+        <span class="tip" id="tip2"></span>
+      </div>
     </div>
   </section>
 
@@ -280,13 +342,13 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);f
       <div>
         <h2 id="ct-h">Hiring for HR?</h2>
         <p>Recruitment support, HR operations and employee records. Available to join full-time immediately, Dhaka.</p>
-        <div class="mail"><code>sajiaferdous1422@gmail.com</code><button class="copy" id="copy" type="button">Copy email</button></div>
+        <div class="mail"><code>ferdous11-1893@s.diu.edu.bd</code><button class="copy" id="copy" type="button">Copy email</button></div>
         <span id="copied" role="status" aria-live="polite" style="font-size:14px"></span>
       </div>
       <div class="actions">
         <a class="btn light" href="cv.pdf" download>Download CV</a>
         <a class="btn" href="https://linkedin.com/in/sadia-ferdous-281480358" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="mailto:sajiaferdous1422@gmail.com">Email</a>
+        <a class="btn" href="mailto:ferdous11-1893@s.diu.edu.bd">Email</a>
       </div>
     </div>
   </section>
@@ -319,8 +381,44 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);f
   var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
   function sel(t){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on});t.focus()}
   tabs.forEach(function(t,i){t.onclick=function(){sel(t)};t.onkeydown=function(e){if(e.key==='ArrowRight')sel(tabs[(i+1)%tabs.length]);if(e.key==='ArrowLeft')sel(tabs[(i-1+tabs.length)%tabs.length])}});
-  document.getElementById('copy').onclick=function(){var m='sajiaferdous1422@gmail.com',o=document.getElementById('copied');
+  document.getElementById('copy').onclick=function(){var m='ferdous11-1893@s.diu.edu.bd',o=document.getElementById('copied');
     (navigator.clipboard?navigator.clipboard.writeText(m):Promise.reject()).then(function(){o.textContent='Copied'},function(){o.textContent=m}).then(function(){setTimeout(function(){o.textContent=''},1800)})};
+
+  // interview board: 13 weeks x 5 days, 150 dots spread over the days (illustrative spread)
+  var weeks=document.getElementById('weeks'), b1=document.getElementById('board1'), tip1=document.getElementById('tip1');
+  var counts=[], total=0;
+  for(var w=0;w<13;w++){var col=document.createElement('div');col.className='week';
+    for(var dd=0;dd<5;dd++){var n=Math.max(0,Math.round(2.0+1.6*Math.sin(w*1.7+dd*2.1)+((w*5+dd)%3===0?1:0)));counts.push(n);total+=n;
+      var day=document.createElement('div');day.className='day';day.dataset.n=n;day.dataset.w=w;day.dataset.d=dd;
+      for(var k=0;k<n;k++){var i=document.createElement('i');i.style.transitionDelay=((w*5+dd)*28+k*40)+'ms';day.appendChild(i)}col.appendChild(day)}weeks.appendChild(col)}
+  var DAYS=['Sun','Mon','Tue','Wed','Thu'];
+  weeks.addEventListener('pointerover',function(e){var t=e.target.closest('.day');if(!t){tip1.style.opacity=0;return}
+    var r=t.getBoundingClientRect(),R=b1.getBoundingClientRect();tip1.textContent='Week '+(+t.dataset.w+1)+', '+DAYS[t.dataset.d]+': '+t.dataset.n+' interview'+(t.dataset.n==1?'':'s');
+    tip1.style.left=(r.left-R.left+r.width/2)+'px';tip1.style.top=(r.top-R.top)+'px';tip1.style.opacity=1});
+  weeks.addEventListener('pointerleave',function(){tip1.style.opacity=0});
+  // attendance sheet: 26 rows x 20 days, a few errors that the pen corrects
+  var sheet=document.getElementById('sheet'), b2=document.getElementById('board2'), tip2=document.getElementById('tip2');
+  for(var r=0;r<26;r++){for(var c=0;c<20;c++){var cell=document.createElement('span');cell.className='cell'+(((r*7+c*13)%53===0||(r*11+c*3)%71===0)?' err':'');cell.dataset.r=r;sheet.appendChild(cell)}}
+  sheet.addEventListener('pointerover',function(e){var t=e.target.closest('.cell');[].forEach.call(sheet.querySelectorAll('.row-h'),function(x){x.classList.remove('row-h')});if(!t){tip2.style.opacity=0;return}
+    var rr=+t.dataset.r;[].forEach.call(sheet.children,function(x){if(+x.dataset.r===rr)x.classList.add('row-h')});
+    var rc=t.getBoundingClientRect(),R=b2.getBoundingClientRect();tip2.textContent='Team member '+String(rr+1).padStart(2,'0');tip2.style.left=(rc.left-R.left)+'px';tip2.style.top=(rc.top-R.top)+'px';tip2.style.opacity=1});
+  sheet.addEventListener('pointerleave',function(){tip2.style.opacity=0;[].forEach.call(sheet.querySelectorAll('.row-h'),function(x){x.classList.remove('row-h')})});
+  function play2(){b2.classList.remove('run','fixed');void b2.offsetWidth;b2.classList.add('run');setTimeout(function(){b2.classList.add('fixed')},reduce?0:1500)}
+  if('IntersectionObserver'in window){
+    var io1=new IntersectionObserver(function(es){if(es[0].isIntersecting){b1.classList.add('on');io1.disconnect()}},{threshold:.35});io1.observe(b1);
+    var io2=new IntersectionObserver(function(es){if(es[0].isIntersecting){play2();io2.disconnect()}},{threshold:.45});io2.observe(b2);
+  }else{b1.classList.add('on');b2.classList.add('fixed')}
+  b2.addEventListener('click',play2);
+  // spotlight follows the pointer on cards; magnetic buttons (mouse only)
+  if(!reduce){
+    document.addEventListener('pointermove',function(e){if(e.pointerType!=='mouse')return;var t=e.target.closest('.card,.panel,.sample,.law');
+      if(t){var r=t.getBoundingClientRect();t.style.setProperty('--mx',(e.clientX-r.left)+'px');t.style.setProperty('--my',(e.clientY-r.top)+'px')}
+      var b=e.target.closest('.btn,.copy');if(b){var q=b.getBoundingClientRect();b.style.translate=((e.clientX-q.left-q.width/2)*.18).toFixed(1)+'px '+((e.clientY-q.top-q.height/2)*.25).toFixed(1)+'px'}},{passive:true});
+    document.addEventListener('pointerout',function(e){var b=e.target.closest&&e.target.closest('.btn,.copy');if(b&&!b.contains(e.relatedTarget))b.style.translate=''});
+    // gentle reveal of sections as they scroll in (content is visible without JS)
+    var secs=[].slice.call(document.querySelectorAll('main section:not(.hero)'));secs.forEach(function(x){x.classList.add('reveal')});
+    var io3=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io3.unobserve(en.target)}})},{rootMargin:'0px 0px -10% 0px'});secs.forEach(function(x){io3.observe(x)});
+  }
 })();
 </script>
 </body>
